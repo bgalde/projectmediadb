@@ -3,14 +3,11 @@
     <div class="col-sm-2">
         <a href="#home" height="25"><img src="assets/img/pmdb2.png" width="75" height="30"></a>
     </div>
-    <div ng-app="ngrepeatSelect" ng-controller="tableController">
+    <div>
       <form name="myForm">
-        <select name="repeatSelect" 
-            id="repeatSelect" 
-            ng-init="repeatSelect = 'options[0].name'" 
-            ng-model="repeatSelect" 
-            ng-options="option.name as option.name for option in options"
-            ng-change="print(repeatSelect)">
+        <select (change)="tableSelect($event.target.value)">
+          <option selected="selected">Table to Query</option>
+	        <option *ngFor="let item of data |async">{{ item.name }}</option>
         </select>
       </form>
     </div>

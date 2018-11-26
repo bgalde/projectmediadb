@@ -8,11 +8,11 @@ import 'rxjs/add/operator/map';
 })
   export class AppService {
     constructor(private http: HttpClient) {}
-    url = 'http://127.0.0.1:8000/api/db';
+    url = 'http://projectmediadb.ddns.net:8180/api/db';
     private result;
 
     getAllTables() {
-        return this.http.get(this.url);
+        return this.http.get(this.url + '/' + 'getTables');
         /*
         this.http.get(this.url)
         .map((data: any) => data.json())
@@ -25,11 +25,6 @@ import 'rxjs/add/operator/map';
             );
         return this.result;
         */
-    }
-
-    private extractData(res: Response) {
-        let body = res.json();
-        return body || {};
     }
 
     getTable(table: string){

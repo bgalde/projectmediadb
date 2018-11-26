@@ -8,7 +8,7 @@ routes.all("/*", function (req, res, next) {
     return next();
 });
 
-routes.get('/api/db', (req, res) => { 
+routes.get('/api/db/getTables', (req, res) => { 
     db_query.gettables((err, rows) => {
         if (err) {
             res.status(400).json(err);

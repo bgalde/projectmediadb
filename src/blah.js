@@ -1,15 +1,21 @@
 var tables = angular.module('ngrepeatSelect', []);
 tables.controller('tableController', function($scope){
-  for (var item in data){
-    for (var key in item) {
-      $scope.options.append({name: item[key]});
-    }
-  }
+        $scope.data = [{name: "Table to Query"}, 
+                           {name: "Games",
+                                link: "#games"}, 
+                           {name: "Video",
+                                link: "#video"}, 
+                           {name: "Music",
+                                link: "#music"}, 
+                           {name: "Pictures",
+                                link: "#pictures"}, 
+                           {name: "Books",
+                                link: "#books"}];
    
-  $scope.print = function(name) {
-        console.log($scope.options);
-        var t = name;
-        console.log(t);
-  }
+        $scope.print = function(name) {
+                                console.log($scope.data);
+                                var t = name;
+                                console.log(t);
+        }
 
 });

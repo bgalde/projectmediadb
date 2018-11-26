@@ -8,11 +8,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'ProjectMediaDB';
   private data;
   private items = [];
   constructor(private appService: AppService) {
-    this.data = this.appService.getAllTables();
   }
+
+  ngOnInit(){
+    this.data = this.appService.getAllTables();
+
+  }
+
 }
