@@ -11,8 +11,14 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit{
   title = 'ProjectMediaDB';
   private data;
-  private items = [];
+
   constructor(private appService: AppService) {
+  }
+
+  tableSelect(value:string) {
+    if value != "Table to Query"{
+      console.log(value + ' was selected.');
+    }
   }
 
   ngOnInit(){
