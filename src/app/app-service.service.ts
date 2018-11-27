@@ -8,27 +8,23 @@ import 'rxjs/add/operator/map';
 })
   export class AppService {
     constructor(private http: HttpClient) {}
+    // URL for the node.js REST API
     url = 'http://projectmediadb.ddns.net:8180/api/db';
     private result;
 
+    // Function that requests the tables from database.
     getAllTables() {
         return this.http.get(this.url + '/' + 'getTables');
-        /*
-        this.http.get(this.url)
-        .map((data: any) => data.json())
-        .subscribe(
-                (data: any) => {
-                    this.result = data;
-                },
-                err => console.log(err), // error
-                () => console.log('getUserStatus Complete') // complete
-            );
-        return this.result;
-        */
     }
 
-    getTable(table: string){
-        return this.http.get<any>(this.url + '/' + table);
+    // Function to get contents of specified database table.
+    getTable(table: string) {
+        console.log('fetching ' + this.url + '/table/' + table + '...');
+        this.http.get(this.url + '/table/' + table).subscribe(results => {
+           console.log(JSON.stringify(results));
+        });
+	return this.http.get(this.url + '/table/' + table);
+
     }
 
 }

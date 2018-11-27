@@ -25,4 +25,8 @@
 
   <h2>Here are some links to help you start: </h2>
   <li *ngFor="let item of data | async"><span *ngFor="let i of item |keyvalue">{{ i.value }}</span></li>
+  <ng-template [ngIf]="tableData?.length > 0">
+    <li *ngFor="let item of tableData |async">{{ item }}</li>
+  </ng-template>
 </div>
+

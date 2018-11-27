@@ -1,6 +1,9 @@
+// import our angular things
 import { Component, OnInit } from '@angular/core';
-import { AppService } from './app-service.service';
 import { Observable } from 'rxjs';
+
+// import our service for the app
+import { AppService } from './app-service.service';
 
 @Component({
   selector: 'app-root',
@@ -11,19 +14,22 @@ import { Observable } from 'rxjs';
 export class AppComponent implements OnInit{
   title = 'ProjectMediaDB';
   private data;
+  private tableData;
 
   constructor(private appService: AppService) {
   }
 
+  // Function to populate table on web app
   tableSelect(value:string) {
-    if value != "Table to Query"{
+    if (value != "Table to Query") {
       console.log(value + ' was selected.');
+      this.tableData = this.appService.getTable(value);
     }
   }
 
+  // Run this function when the web app loads
   ngOnInit(){
     this.data = this.appService.getAllTables();
-
   }
 
 }
