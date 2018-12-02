@@ -1,0 +1,34 @@
+<title>{{ title }}</title>
+<div class="navbar">
+    <div class="col-sm-2">
+        <a href="#home" height="25"><img src="assets/img/pmdb2.png" width="75" height="30"></a>
+    </div>
+    <div>
+      <form name="myForm">
+        <select (change)="tableSelect($event.target.value)">
+          <option selected="selected">Table to Query</option>
+	        <option *ngFor="let item of data |async">{{ item.name }}</option>
+        </select>
+      </form>
+    </div>
+    <div class="col-sm-6">
+        <img src="assets/img/projectmediadb4.png" alt="ProjectMediaDB" width="200" height="50" align="right">
+    </div>
+</div>
+<div class="col-*-*">
+  <br>
+  <h2>Welcome to {{ title }}</h2>
+  <h3>SQL Engine designed for UMUC CMSC 495 Fall 2018 class project</h3>
+  <h4>Created by Ryan Flynn, Brandon Galde, and Yodit Emiru</h4>
+  <!--><h2>Here are some links to help you start: </h2>
+  <li *ngFor="let item of data | async"><span *ngFor="let i of item |keyvalue">{{ i.value }}</span></li>
+  <ng-template [ngIf]="tableData?.length > 0">
+    <li *ngFor="let item of tableData |async">{{ item }}</li>
+  </ng-template> -->
+</div>
+<div>
+  <span>
+    <app-display-tables></app-display-tables>
+  </span>
+</div>
+
