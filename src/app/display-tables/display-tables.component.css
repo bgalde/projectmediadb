@@ -1,0 +1,19 @@
+.display-table {
+  width: 80%;
+  margin: 20px auto;
+}
+
+.mat-column-id{
+  width: 10%;
+}
+
+.mat-column-name {
+  width: 50%;
+}
+
+.mat-column-year {
+  width: 30%;
+}
+.mat-column-type {
+  width: 50%;
+}
