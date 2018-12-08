@@ -35,7 +35,7 @@ export class DisplayTablesDataSource extends DataSource<DisplayTablesItem> {
   }
 
   ngOnInit(){
-   this.data = EXAMPLE_DATA;
+   //this.data = EXAMPLE_DATA;
    /*this.appService.getTable()
       .subscribe(response => {
         this.tableData = response;

@@ -18,7 +18,7 @@ export class AppComponent implements OnInit{
   private data;
   private tableData;
 
-  constructor(public dialog: MatDialog, private appService: AppService) {
+  constructor(private appService: AppService) {
   }
 
   // Function to populate table on web app

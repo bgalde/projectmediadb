@@ -31,11 +31,11 @@ export class DisplayTablesComponent implements OnInit {
       height: '90%',
       width: '70%',
       data: {
-        row = "This row was picked: " + row,
+       // row = "This row was picked: " + row,
       }
     });
 
-    console.log("This record was clicked: " + row);
+    console.log("This record was clicked: " + JSON.stringify(row));
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
