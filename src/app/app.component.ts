@@ -1,9 +1,11 @@
 // import our angular things
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material';
 
 // import our service for the app
 import { AppService } from './app-service.service';
+import { DialogComponent } from './dialog/dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +26,11 @@ export class AppComponent implements OnInit{
     if (value != "Table to Query") {
       console.log(value + ' was selected.');
       this.tableData = this.appService.getTable(value);
+      /*
+      this.tableData = this.appService.getTable(value).subscribe(
+        value => console.log(JSON.stringify(value));
+      );
+      */
     }
   }
 
