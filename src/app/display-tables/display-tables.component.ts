@@ -23,6 +23,7 @@ export class DisplayTablesComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new DisplayTablesDataSource(this.paginator, this.sort, this.appService);
     console.log();
+    this.refresh();
     // this.dataSource.tableData = this.appService.getResults();
   }
 
@@ -30,9 +31,7 @@ export class DisplayTablesComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogComponent, {
       height: '90%',
       width: '70%',
-      data: {
-       // row = "This row was picked: " + row,
-      }
+      data: row
     });
 
     console.log("This record was clicked: " + JSON.stringify(row));

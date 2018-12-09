@@ -19,6 +19,7 @@ export interface DisplayTablesItem {
 const EXAMPLE_DATA: DisplayTablesItem[] = [
     {id: 1, name: "Angular 7", year: 2018, type: "Programming"},
     {id: 2, name: "Java", year: 2017, type: "Programming"}
+
 ];
 
 /**
@@ -34,13 +35,13 @@ export class DisplayTablesDataSource extends DataSource<DisplayTablesItem> {
   }
 
   ngOnInit(){
-   /*this.appService.getTable()
+   this.appService.getTable(value)
       .subscribe(response => {
-        this.tableData = response;
-        console.log(this.tableData);
+        this.results = response;
+        console.log(this.results);
         //this.DataSource.data = this.tableData;
         
-      });*/
+      });
   }
 
   /**
