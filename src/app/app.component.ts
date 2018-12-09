@@ -26,9 +26,14 @@ export class AppComponent implements OnInit{
     if (value != "Table to Query") {
       console.log(value + ' was selected.');
       this.tableData = this.appService.getTable(value);
+      /*
+      this.tableData = this.appService.getTable(value).subscribe(
+        value => console.log(JSON.stringify(value));
+      );
+      */
     }
   }
-  
+
   // Run this function when the web app loads
   ngOnInit(){
     this.data = this.appService.getAllTables();

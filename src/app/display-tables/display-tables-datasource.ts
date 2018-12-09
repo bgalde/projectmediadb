@@ -28,14 +28,12 @@ const EXAMPLE_DATA: DisplayTablesItem[] = [
  */
 export class DisplayTablesDataSource extends DataSource<DisplayTablesItem> {
   data: DisplayTablesItem[] = EXAMPLE_DATA;
-  private tableData;
 
   constructor(private paginator: MatPaginator, private sort: MatSort, private appService: AppService) {
     super();
   }
 
   ngOnInit(){
-   //this.data = EXAMPLE_DATA;
    /*this.appService.getTable()
       .subscribe(response => {
         this.tableData = response;
@@ -44,6 +42,7 @@ export class DisplayTablesDataSource extends DataSource<DisplayTablesItem> {
         
       });*/
   }
+
   /**
    * Connect this data source to the table. The table will only update when
    * the returned stream emits new items.

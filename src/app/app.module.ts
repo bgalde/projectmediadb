@@ -9,7 +9,7 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule } fr
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog/dialog.component';
 
-@NgModule({
+@NgModule({ 
   declarations: [
     AppComponent,
     DisplayTablesComponent,
@@ -17,7 +17,7 @@ import { DialogComponent } from './dialog/dialog.component';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule, 
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,

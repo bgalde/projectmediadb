@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { DisplayTablesDataSource } from './display-tables-datasource';
 import { AppService } from '../app-service.service';
@@ -15,7 +15,6 @@ export class DisplayTablesComponent implements OnInit {
   dataSource = new DisplayTablesDataSource();
   private row;
 
-
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['id', 'name', 'type', 'year'];
 
@@ -24,6 +23,7 @@ export class DisplayTablesComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new DisplayTablesDataSource(this.paginator, this.sort, this.appService);
     console.log();
+    // this.dataSource.tableData = this.appService.getResults();
   }
 
   openDialog(event, row) {
@@ -43,4 +43,10 @@ export class DisplayTablesComponent implements OnInit {
     });
     
   }
+    /*
+    this.tableData = this.appService.getTable(value).subscribe(
+      value => console.log(JSON.stringify(value));
+    );
+    */
+
 } 
