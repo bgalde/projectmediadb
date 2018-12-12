@@ -38,4 +38,19 @@ routes.get('/api/db/table/:table_name', (req, res) => {
     });
 });
 
+// function that will get the description of a table.
+routes.get('/api/db/tableDesc/:table_name', (req, res) => {
+    table_name = req.params.table_name;
+    console.log('Getting description for table ' + table_name);
+    db_query.gettabledesc((err, rows, table_name) => {
+        if (err) {
+            res.status(400).json(err);
+        }
+        else {
+            res.status(200).json(rows);
+        }
+    });
+});
+
+
 module.exports = routes;

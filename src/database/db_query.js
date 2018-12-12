@@ -11,6 +11,11 @@ var db_query = {
     {
         console.log(callback);
         return db.query('SELECT * from ' + table_name, callback);
+    },
+    gettabledesc: function(callback)
+    {
+        console.log(callback);
+        return db.query('DESCRIBE ' + table_name, callback);
     }
 }
 

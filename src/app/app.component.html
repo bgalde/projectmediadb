@@ -28,7 +28,21 @@
 </div>
 <div>
   <span>
-    <app-display-tables></app-display-tables>
+    <ng-container *ngIf="appService.table !== undefined">
+      <div class="mat-elevation-z8 display-table" >
+          <mat-table #table class="full-width-table" [dataSource]="dataSource" aria-label="Elements">
+              <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index " matColumnDef="{{disCol}}">
+                  <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+                  <mat-cell *matCellDef="let element "> {{ element[disCol] }}
+                  </mat-cell>
+              </ng-container>
+          
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog($event, row)"></mat-row>
+          </mat-table>
+      </div>
+  </ng-container>
+  
   </span>
 </div>
 

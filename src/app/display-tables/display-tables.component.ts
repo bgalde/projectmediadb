@@ -1,5 +1,6 @@
 import { Component, OnChanges, SimpleChanges, OnInit, ViewChild, Inject } from '@angular/core';
-import { MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { MatPaginator, MatSort, MatDialog, MatTableDataSource } from '@angular/material';
+import { Observable } from 'rxjs/Observable';
 import { DisplayTablesDataSource } from './display-tables-datasource';
 import { AppService } from '../app-service.service';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -12,18 +13,37 @@ import { DialogComponent } from '../dialog/dialog.component';
 export class DisplayTablesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource = new DisplayTablesDataSource();
   private row;
+  public dataSource;
+  public results: Observable<any>;
+  public columns: Observable<any>;
+  public displayedColumns: any=[];
+  public data: any=[];
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['id', 'name', 'type', 'year'];
 
   constructor(public dialog: MatDialog, private appService: AppService) {}
 
   ngOnInit() {
-    this.dataSource = new DisplayTablesDataSource(this.paginator, this.sort, this.appService);
-    console.log();
-    // this.dataSource.tableData = this.appService.getResults();
+    this.dataSource = [] //TABLE DATASOURCE
+
+    //GET SOMETHING FROM SERVICE 
+    this.appService.results.subscribe(res=> { 
+      this.results=res; 
+      for (let v in res) {
+        this.data.push(res[v]);
+      }
+      console.log(this.data);
+    })
+
+    this.appService.columns.subscribe(col=> { 
+      for (let v in col) {
+        this.displayedColumns.push(col[v].Field);
+      }
+      console.log(this.displayedColumns);
+    } ) ;
+
+    this.dataSource = new MatTableDataSource(this.data);
+
   }
 
   openDialog(event, row) {

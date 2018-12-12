@@ -1,41 +1,21 @@
-<div class="mat-elevation-z8 display-table" >
-  <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
-
-    <!-- Id Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="'customeWidth'">Id</th>
-      <td mat-cell *matCellDef="let row" [ngClass]="'customWidth'">{{row.id}}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
-        <td mat-cell *matCellDef="let row">{{row.name}}</td>
-    </ng-container>
-
-    <!-- Type Column -->
-    <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Type</th>
-        <td mat-cell *matCellDef="let row">{{row.type}}</td>
-    </ng-container>
-
-     <!-- Year Column -->
-     <ng-container matColumnDef="year">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Year</th>
-        <td mat-cell *matCellDef="let row">{{row.year}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog($event, row)"></tr>
-  </table>
-
-  <mat-paginator #paginator
-      [length]="dataSource.data.length"
-      [pageIndex]="0"
-      [pageSize]="10"
-      [pageSizeOptions]="[10, 20, 50]">
-  </mat-paginator>
-</div>
+<ng-container *ngIf="appService.table !== undefined">
+    <div class="mat-elevation-z8 display-table" >
+        <mat-table #table class="full-width-table" [dataSource]="dataSource" aria-label="Elements">
+            <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index " matColumnDef="{{disCol}}">
+                <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
+                <mat-cell *matCellDef="let element "> {{ element[disCol] }}
+                </mat-cell>
+            </ng-container>
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog($event, row)"></mat-row>
+        </mat-table>
+        
+    </div>
+              
+</ng-container>
 
 <!-- Test data -->
-<li *ngFor="let item of dataSource.appService.results | async"><span *ngFor="let i of item |keyvalue">{{ i.value }}</span></li>
+<li *ngFor="let row of columns | async">{{row.Field}}
+
+</li>
