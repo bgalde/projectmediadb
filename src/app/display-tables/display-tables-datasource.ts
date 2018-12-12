@@ -17,6 +17,13 @@ export interface DisplayTablesItem {
   type: string
 }
 
+// TODO: replace this with real data from your application
+const EXAMPLE_DATA: DisplayTablesItem[] = [
+    {id: 1, name: "Angular 7", year: 2018, type: "Programming"},
+    {id: 2, name: "Java", year: 2017, type: "Programming"}
+
+];
+
 /**
  * Data source for the DisplayTables view. This class should
  * encapsulate all logic for fetching and manipulating the displayed data
@@ -32,6 +39,7 @@ export class DisplayTablesDataSource {
   constructor(private paginator: MatPaginator, private sort: MatSort, private appService: AppService) {
   }
 
+  /*
   ngOnInit() {
 
     this.data = [] //TABLE DATASOURCE
@@ -69,37 +77,19 @@ export class DisplayTablesDataSource {
     //INITIALIZE MatTableDataSource
     this.dataSource = new MatTableDataSource(this.data);
     }
-    
+    */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  public tableData;
+  /*
+  ngOnInit(){
+   this.appService.getTable(value)
+      .subscribe(response => {
+        this.results = response;
+        console.log(this.results);
+        //this.DataSource.data = this.tableData;
+        
+      });
+  }
+  */
 
   /**
    * Connect this data source to the table. The table will only update when

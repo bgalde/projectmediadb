@@ -1,5 +1,5 @@
 // import our angular things
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
@@ -17,12 +17,17 @@ import { DialogComponent } from './dialog/dialog.component';
 export class AppComponent implements OnInit{
   title = 'ProjectMediaDB';
   private data;
+<<<<<<< HEAD
   private tableData: any=[];
   public displayedColumns: any=[];
   public dataSource: any=[];
 
+=======
+  private tableData;
+  public newTitle;
+>>>>>>> 002cfc719f52eb95137e8a35b189f72300c55391
 
-  constructor(private appService: AppService) {
+  constructor(public dialog: MatDialog, private appService: AppService) {
   }
 
   // Function to populate table on web app
@@ -56,7 +61,23 @@ export class AppComponent implements OnInit{
 
     }
   }
+  openEmptyDialog($event) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      height: '90%',
+      width: '70%',
+      data: {
+       
+      }
+    });
 
+    
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+    
+  }
   // Run this function when the web app loads
   ngOnInit(){
     this.data = this.appService.getAllTables();

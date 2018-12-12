@@ -1,7 +1,21 @@
-<h2 mat-dialog-title>Title</h2>
+<h2 mat-dialog-title>Insert a Record</h2>
 
 <mat-dialog-content>
-  <p>{{data.row}}</p>
+    <label>ID:      
+        <input [(ngModel)]="data.id" placeholder="id"/>
+    </label>
+    <br>
+    <label>Title:  
+        <input [(ngModel)]="data.name" placeholder="name"/>
+    </label>
+    <br>
+    <label>Type:   
+        <input [(ngModel)]="data.type" placeholder="type"/>
+    </label>
+    <br>
+    <label>Year:   
+        <input [(ngModel)]="data.year" placeholder="year"/>
+    </label>
 </mat-dialog-content>
 
 <mat-dialog-actions>

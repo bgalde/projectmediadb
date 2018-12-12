@@ -8,6 +8,7 @@ import { DisplayTablesComponent } from './display-tables/display-tables.componen
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog/dialog.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({ 
   declarations: [
@@ -22,7 +23,8 @@ import { DialogComponent } from './dialog/dialog.component';
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatDialogModule
+    MatDialogModule,
+    FormsModule
   ],
   entryComponents: [
     DialogComponent
