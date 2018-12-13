@@ -52,5 +52,20 @@ routes.get('/api/db/tableDesc/:table_name', (req, res) => {
     });
 });
 
+// function that will insert data into specified table
+routes.get('/api/db/insert/:table_name/:column_names/:row_data', (req, res) => {
+    table_name = req.params.table_name;
+    column_names = req.params.column_names;
+    row_data = req.params.row_data;
+    console.log('Inserting data into table ' + table_name);
+    db_query.insertdata((err, rows, table_name, column_names, row_data) => {
+        if (err) {
+            res.status(400).json(err);
+        }
+        else {
+            res.status(200).json(rows);
+        }
+    });
+});
 
 module.exports = routes;

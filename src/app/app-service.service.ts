@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
     public columns: Observable<any>;
     public table;
     public modal_state;
+    public editResults;
 
     constructor(private http: HttpClient) {
       this.results = new Observable<any>();
@@ -35,20 +36,38 @@ import 'rxjs/add/operator/map';
         this.results = this.http.get(this.url + '/table/' + table);
         this.columns = this.http.get(this.url + '/tableDesc/' + table);
 
+	    return this.http.get(this.url + '/table/' + table);
+    }
 
-        /*
-        this.results.subscribe((w: Observable<any>) => {console.log(JSON.stringify(w));
-        };)
-        */
+    editTable(result: any) {
+      var col = "";
+      var res = "";
 
-        /* Subscribed observable for printing to console
-        this.results = this.http.get(this.url + '/table/' + table).subscribe(results => {
-           console.log(JSON.stringify(results));
-        });
-        */
-
-	return this.http.get(this.url + '/table/' + table);
-
+      console.log("col.length: " + col.length);
+    
+      for(let i in result){
+        if(col.length == 0){
+          col = i; 
+          res = result[i];
+        } else {
+          col += "+" + i;
+          res += "+" + result[i];
+        }
+        console.log("columns: " + col);
+        console.log("results: " + res);
+      }
+      switch(this.modal_state){
+        case "insert":
+            console.log("<<<< " + this.url + "/insert/" + this.table + "/" + col + "/" + res.replace(/\s/g, "%20"));
+            this.editResults = this.http.get(this.url + "/insert/" + this.table + "/" + col + "/" + res.replace(/\s/g, "%20"));
+            this.editResults.subscribe(w=>console.log("Results from insert: " + w));
+            break;
+        case "delete":
+            console.log(">>>> " + this.url + this.table + "/delete/");
+            break;
+        default:
+            break;
+      }
     }
 
     setModalState(value:string) { 

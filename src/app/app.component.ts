@@ -26,8 +26,6 @@ export class AppComponent implements OnInit{
   public rowData: any=[];
   public url;
   private count = 0;
-  private columns = "";
-  private res = "";
 
   constructor(public dialog: MatDialog, private appService: AppService) {
   }
@@ -71,28 +69,7 @@ export class AppComponent implements OnInit{
     console.log("This record was clicked: " + JSON.stringify(row));
 
     dialogRef.afterClosed().subscribe(result => {
-      this.url = "http://projectmediadb.ddns.net:8180/api/db/"
-      for(let i in result){
-        if(this.count == 0){
-          this.columns += i; 
-          this.res += result[i];
-        } else {
-          this.columns += "+" + i;
-          this.res += "+" + result[i];
-        }
-        this.count++;
-      }
-      switch(this.appService.modal_state){
-        case "insert":
-            console.log("<<<< " + this.url + this.appService.table + "/insert/"
-                + this.columns + "/" + this.res.replace(/\s/g, "%20"));
-            break;
-        case "delete":
-        console.log(">>>> " + this.url + this.appService.table + "/delete/");
-            break;
-        default:
-            break;
-      }
+      this.appService.editTable(result);
     });
     
   }
@@ -106,7 +83,7 @@ export class AppComponent implements OnInit{
     });
 
     
-
+    /*
     dialogRef.afterClosed().subscribe(result => {
       this.url = "http://projectmediadb.ddns.net:8180/api/db/"
       for(let i in result){
@@ -135,7 +112,11 @@ export class AppComponent implements OnInit{
             break;
       }
     });
-    
+    */
+  dialogRef.afterClosed().subscribe(result => {
+    this.appService.editTable(result);
+  });
+
   }
   // Run this function when the web app loads
   ngOnInit(){

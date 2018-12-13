@@ -16,6 +16,37 @@ var db_query = {
     {
         console.log(callback);
         return db.query('DESCRIBE ' + table_name, callback);
+    },
+    insertdata: function(callback)
+    {
+        var insert = "INSERT INTO " + table_name + "(";
+        var columns = column_names.split('+');
+        var values = row_data.split('+');
+        count = 0;
+        columns.forEach(function(column) {
+            insert += column;
+            if (count < columns.length -1) {
+                insert += ", ";
+            }
+            count++;
+        });
+        insert += ") values(";
+        count = 0;
+        values.forEach(function(value) {
+            if(!isNaN(value)) {
+                insert += value;
+            }
+            else {
+                insert += "'" + value + "'";
+            }
+            if (count < values.length -1) {
+                insert += ", ";
+            }
+            count++;
+        });
+        insert += ");";
+        console.log(insert);
+        return db.query(insert);
     }
 }
 
