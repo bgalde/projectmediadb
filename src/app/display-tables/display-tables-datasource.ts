@@ -19,8 +19,8 @@ export interface DisplayTablesItem {
 
 // TODO: replace this with real data from your application
 const EXAMPLE_DATA: DisplayTablesItem[] = [
-    {id: 1, name: "Angular 7", year: 2018, type: "Programming"},
-    {id: 2, name: "Java", year: 2017, type: "Programming"}
+    /*{id: 1, name: "Angular 7", year: 2018, type: "Programming"},
+    {id: 2, name: "Java", year: 2017, type: "Programming"}*/
 
 ];
 
@@ -55,7 +55,7 @@ export class DisplayTablesDataSource {
     });
     */
     //FILL TABLE DATASOURCE 
-    var obj = {};
+   /* var obj = {};
     for (let v in this.columns) {
       console.log(v);
     }
@@ -65,11 +65,11 @@ export class DisplayTablesDataSource {
       obj[i.name] = i.value;
         this.data.push(obj);
         obj={};
-      */
-    }
+      
+    }*/
     
     //CREATE DISPLAYED COLUMNS DYNAMICALLY
-    this.displayedColumns = [];
+   /* this.displayedColumns = [];
     for( let v in this.columns[0]){
         this.displayedColumns.push(v);
     }
@@ -96,6 +96,7 @@ export class DisplayTablesDataSource {
    * the returned stream emits new items.
    * @returns A stream of the items to be rendered.
    */
+  /*
   connect(): Observable<any> {
     // Combine everything that affects the rendered data into one update
     // stream for the data-table to consume.
@@ -119,12 +120,15 @@ export class DisplayTablesDataSource {
    *  Called when the table is being destroyed. Use this function, to clean up
    * any open connections or free any held resources that were set up during connect.
    */
+  /*
+
   disconnect() {}
 
   /**
    * Paginate the data (client-side). If you're using server-side pagination,
    * this would be replaced by requesting the appropriate data from the server.
    */
+  /*
   private getPagedData(data: any) {
     const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
     return data.splice(startIndex, this.paginator.pageSize);
@@ -134,6 +138,7 @@ export class DisplayTablesDataSource {
    * Sort the data (client-side). If you're using server-side sorting,
    * this would be replaced by requesting the appropriate data from the server.
    */
+  /*
   private getSortedData(data: any) {
     if (!this.sort.active || this.sort.direction === '') {
       return data;
@@ -155,7 +160,10 @@ export class DisplayTablesDataSource {
   }
 }
 
+
 /** Simple sort comparator for example ID/Name columns (for client-side sorting). */
+/*
 function compare(a, b, isAsc) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}*/
 }

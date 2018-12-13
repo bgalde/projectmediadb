@@ -12,6 +12,7 @@ import 'rxjs/add/operator/map';
     public results: Observable<any>;
     public columns: Observable<any>;
     public table;
+    public modal_state;
 
     constructor(private http: HttpClient) {
       this.results = new Observable<any>();
@@ -49,6 +50,12 @@ import 'rxjs/add/operator/map';
 	return this.http.get(this.url + '/table/' + table);
 
     }
+
+    setModalState(value:string) { 
+      this.modal_state = value;
+      return this.modal_state;
+    }
+
 
     getResults() {
       this.results.subscribe(m => console.log(JSON.stringify(m)));

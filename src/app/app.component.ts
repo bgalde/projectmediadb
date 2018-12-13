@@ -1,7 +1,9 @@
 // import our angular things
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialog } from '@angular/material';
+import { URLSearchParams } from '@angular/http';
 
 
 // import our service for the app
@@ -17,15 +19,15 @@ import { DialogComponent } from './dialog/dialog.component';
 export class AppComponent implements OnInit{
   title = 'ProjectMediaDB';
   private data;
-<<<<<<< HEAD
+
   private tableData: any=[];
   public displayedColumns: any=[];
   public dataSource: any=[];
-
-=======
-  private tableData;
-  public newTitle;
->>>>>>> 002cfc719f52eb95137e8a35b189f72300c55391
+  public rowData: any=[];
+  public url;
+  private count = 0;
+  private columns = "";
+  private res = "";
 
   constructor(public dialog: MatDialog, private appService: AppService) {
   }
@@ -35,14 +37,11 @@ export class AppComponent implements OnInit{
     if (value != "Table to Query") {
       console.log(value + ' was selected.');
       this.appService.getTable(value);
-      /*
-      this.tableData = this.appService.getTable(value).subscribe(
-        value => console.log(JSON.stringify(value));
-      );
-      */
+
      this.dataSource = [];
      this.displayedColumns = [];
      this.tableData = [];
+
      this.appService.results.subscribe(res=> { 
       for (let v in res) {
         this.tableData.push(res[v]);
@@ -54,12 +53,48 @@ export class AppComponent implements OnInit{
       for (let v in col) {
         this.displayedColumns.push(col[v].Field);
       }
-    } ) ;
+    });
 
     console.log(this.displayedColumns);
     this.dataSource = new MatTableDataSource(this.tableData);
 
     }
+  }
+
+  openDialog(event, row) {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      height: '100%',
+      width: '30%',
+      data: row
+    });
+
+    console.log("This record was clicked: " + JSON.stringify(row));
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.url = "http://projectmediadb.ddns.net:8180/api/db/"
+      for(let i in result){
+        if(this.count == 0){
+          this.columns += i; 
+          this.res += result[i];
+        } else {
+          this.columns += "+" + i;
+          this.res += "+" + result[i];
+        }
+        this.count++;
+      }
+      switch(this.appService.modal_state){
+        case "insert":
+            console.log("<<<< " + this.url + this.appService.table + "/insert/"
+                + this.columns + "/" + this.res.replace(/\s/g, "%20"));
+            break;
+        case "delete":
+        console.log(">>>> " + this.url + this.appService.table + "/delete/");
+            break;
+        default:
+            break;
+      }
+    });
+    
   }
   openEmptyDialog($event) {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -73,8 +108,32 @@ export class AppComponent implements OnInit{
     
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+      this.url = "http://projectmediadb.ddns.net:8180/api/db/"
+      for(let i in result){
+        if(this.count == 0){
+          this.columns += i; 
+          this.res += result[i];
+        } else {
+          this.columns += "+" + i;
+          this.res += "+" + result[i];
+        }
+        this.count++;
+      }
+
+      //<<<< http://projectmediadb.ddns.net:8180/api/db/books/ insert/function replace() { [native code] }/%202+4+test+45+34+test+test
+      switch(this.appService.modal_state){
+        case "insert":
+            console.log("<<<< " + this.url + this.appService.table + "/insert/"
+                 + this.columns + "/" + this.res.replace(/\s/g, "%20"));
+           // return this.url + this.appService.table + "/" this.appService.modal_state + "/" + this.columns.replace + "/" + this.res.replace("", "%20")
+            break;
+        case "delete":
+            console.log(">>>> " + this.url + this.appService.table + "/delete/");
+           // return this.url + this.appService.table + "/" this.appService.modal_state;
+            break;
+        default:
+            break;
+      }
     });
     
   }
@@ -83,5 +142,4 @@ export class AppComponent implements OnInit{
     this.data = this.appService.getAllTables();
 
   }
-
 }

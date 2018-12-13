@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AppService } from '../app-service.service';
-import { DisplayTablesComponent } from './display-tables.component';
 
 @Component({
   selector: 'app-dialog',
@@ -9,20 +8,41 @@ import { DisplayTablesComponent } from './display-tables.component';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  @Input() data: any;
-
+  @Input() inputData;
+  private fields: any=[];
+  private title;
+  public modal_state;
+  
   constructor(public dialogRef: MatDialogRef<DialogComponent>, 
-    @Inject(MAT_DIALOG_DATA) public data: any, private appService: AppService) {
+    @Inject(MAT_DIALOG_DATA) public data, private appService: AppService) {
 
    }
 
   ngOnInit() {
+    this.appService.columns.subscribe(col=> { 
+      for (let v in col) {
+        this.fields.push(col[v].Field);
+      }
+    });
+    this.title = this.appService.table;
   }
 
-  save(): void {
-    this.dialogRef.close("It was saved");
-    //save the document
 
+  save(): void {
+    this.appService.setModalState("insert");
+    this.dialogRef.close(this.data);
+    //save the document,
+
+  }
+
+  delete(): void {
+    this.appService.setModalState("delete");
+    this.dialogRef.close(this.data);
+    //delete the document,
+  }
+
+  close(): void {
+    this.dialogRef.close();
   }
 
 }

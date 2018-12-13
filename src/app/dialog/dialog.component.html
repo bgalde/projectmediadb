@@ -1,24 +1,14 @@
-<h2 mat-dialog-title>Insert a Record</h2>
+<h2 mat-dialog-title>Insert a Record for {{title}}</h2>
 
 <mat-dialog-content>
-    <label>ID:      
-        <input [(ngModel)]="data.id" placeholder="id"/>
-    </label>
-    <br>
-    <label>Title:  
-        <input [(ngModel)]="data.name" placeholder="name"/>
-    </label>
-    <br>
-    <label>Type:   
-        <input [(ngModel)]="data.type" placeholder="type"/>
-    </label>
-    <br>
-    <label>Year:   
-        <input [(ngModel)]="data.year" placeholder="year"/>
+    <label *ngFor="let item of fields">{{item}}  
+    <br>  
+    <input matInput [(ngModel)]="data[item]" placeholder=""/><br>
     </label>
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-raised-button (click)="save()">Save</button>
+  <button mat-button [mat-dialog-close]>Cancel</button>
+  <button mat-raised-button (click)="delete()">Delete Record</button>
+  <button mat-raised-button (click)="save()">Save Record</button>
 </mat-dialog-actions>

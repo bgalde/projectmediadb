@@ -24,7 +24,6 @@ export class DisplayTablesComponent implements OnInit {
   constructor(public dialog: MatDialog, private appService: AppService) {}
 
   ngOnInit() {
-<<<<<<< HEAD
     this.dataSource = [] //TABLE DATASOURCE
 
     //GET SOMETHING FROM SERVICE 
@@ -45,12 +44,9 @@ export class DisplayTablesComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource(this.data);
 
-=======
     this.dataSource = new DisplayTablesDataSource(this.paginator, this.sort, this.appService);
-    console.log();
-    this.refresh();
     // this.dataSource.tableData = this.appService.getResults();
->>>>>>> 002cfc719f52eb95137e8a35b189f72300c55391
+
   }
 
   openDialog(event, row) {
