@@ -1,8 +1,8 @@
 // import our angular things
-import { Component, OnChanges, SimpleChanges, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, OnInit, Inject, ChangeDetectorRef, ViewChild } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs';
-import { MatTableDataSource, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatTable } from '@angular/material';
 import { URLSearchParams } from '@angular/http';
 
 
@@ -17,6 +17,7 @@ import { DialogComponent } from './dialog/dialog.component';
 })
 
 export class AppComponent implements OnInit{
+  @ViewChild(MatTable) table: MatTable<any>;
   title = 'ProjectMediaDB';
   private data;
 
@@ -27,7 +28,7 @@ export class AppComponent implements OnInit{
   public url;
   private count = 0;
 
-  constructor(public dialog: MatDialog, private appService: AppService) {
+  constructor(public dialog: MatDialog, private appService: AppService, private changeDetectorRefs: ChangeDetectorRef) {
   }
 
   // Function to populate table on web app
@@ -70,8 +71,15 @@ export class AppComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       this.appService.editTable(result);
+      this.tableSelect(this.appService.table);
+      this.refresh();
     });
     
+  }
+
+  refresh() {
+    this.table.renderRows();
+    this.changeDetectorRefs.detectChanges();
   }
   openEmptyDialog($event) {
     const dialogRef = this.dialog.open(DialogComponent, {
@@ -115,6 +123,8 @@ export class AppComponent implements OnInit{
     */
   dialogRef.afterClosed().subscribe(result => {
     this.appService.editTable(result);
+    this.tableSelect(this.appService.table);
+    this.refresh();
   });
 
   }

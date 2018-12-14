@@ -35,13 +35,14 @@ import 'rxjs/add/operator/map';
         // this.columns = this.http.get(this.url + '/tableDesc/' + table);
         this.results = this.http.get(this.url + '/table/' + table);
         this.columns = this.http.get(this.url + '/tableDesc/' + table);
-
+        this.columns.subscribe((result: any) => console.log(result.Key));
 	    return this.http.get(this.url + '/table/' + table);
     }
 
     editTable(result: any) {
       var col = "";
       var res = "";
+      var key = "";
 
       console.log("col.length: " + col.length);
     
@@ -49,12 +50,14 @@ import 'rxjs/add/operator/map';
         if(col.length == 0){
           col = i; 
           res = result[i];
+          key = this.columns[i]
         } else {
           col += "+" + i;
           res += "+" + result[i];
         }
-        console.log("columns: " + col);
-        console.log("results: " + res);
+        //console.log("columns: " + col);
+        console.log("key: " + key);
+        //console.log("results: " + res);
       }
       switch(this.modal_state){
         case "insert":
@@ -63,7 +66,7 @@ import 'rxjs/add/operator/map';
             this.editResults.subscribe(w=>console.log("Results from insert: " + w));
             break;
         case "delete":
-            console.log(">>>> " + this.url + this.table + "/delete/");
+            console.log(">>>> " + this.url + "/" + this.table + "/delete/");
             break;
         default:
             break;
