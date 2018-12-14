@@ -71,14 +71,18 @@ export class AppComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       this.appService.editTable(result);
-      this.tableSelect(this.appService.table);
+      for(let v in result){
+           console.log(JSON.stringify(v) + " " + JSON.stringify(result[v]));
+           this.tableData.push(result[v]);
+      }
+      this.dataSource = new MatTableDataSource(this.tableData);
       this.refresh();
     });
     
   }
 
   refresh() {
-    this.table.renderRows();
+    this.tableSelect(this.appService.table);
     this.changeDetectorRefs.detectChanges();
   }
   openEmptyDialog($event) {
@@ -122,9 +126,13 @@ export class AppComponent implements OnInit{
     });
     */
   dialogRef.afterClosed().subscribe(result => {
-    this.appService.editTable(result);
-    this.tableSelect(this.appService.table);
-    this.refresh();
+   this.appService.editTable(result);
+   for(let v in result){
+        console.log(JSON.stringify(v) + " " + JSON.stringify(result[v]));
+        this.tableData.push(result[v]);
+   }
+   this.dataSource = new MatTableDataSource(this.tableData);
+   this.refresh();
   });
 
   }

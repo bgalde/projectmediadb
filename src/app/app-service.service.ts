@@ -14,6 +14,9 @@ import 'rxjs/add/operator/map';
     public table;
     public modal_state;
     public editResults;
+    public primaryKey;
+    public primaryField;
+    public primaryValue;
 
     constructor(private http: HttpClient) {
       this.results = new Observable<any>();
@@ -35,14 +38,20 @@ import 'rxjs/add/operator/map';
         // this.columns = this.http.get(this.url + '/tableDesc/' + table);
         this.results = this.http.get(this.url + '/table/' + table);
         this.columns = this.http.get(this.url + '/tableDesc/' + table);
-        this.columns.subscribe((result: any) => console.log(result.Key));
+        this.columns.subscribe(res => {
+          if(res[0].Key == "PRI"){
+            //console.log(res[0].Key + " " + JSON.stringify(res[0].Field));
+            this.primaryKey = res[0].Key;
+            this.primaryField = res[0].Field;
+          }
+        });
 	    return this.http.get(this.url + '/table/' + table);
     }
 
     editTable(result: any) {
       var col = "";
       var res = "";
-      var key = "";
+      var value = "";
 
       console.log("col.length: " + col.length);
     
@@ -50,13 +59,12 @@ import 'rxjs/add/operator/map';
         if(col.length == 0){
           col = i; 
           res = result[i];
-          key = this.columns[i]
+          value = result[i];
         } else {
           col += "+" + i;
           res += "+" + result[i];
         }
         //console.log("columns: " + col);
-        console.log("key: " + key);
         //console.log("results: " + res);
       }
       switch(this.modal_state){
@@ -66,7 +74,9 @@ import 'rxjs/add/operator/map';
             this.editResults.subscribe(w=>console.log("Results from insert: " + w));
             break;
         case "delete":
-            console.log(">>>> " + this.url + "/" + this.table + "/delete/");
+            console.log(">>>> " + this.url + "/delete/" + this.table + "/" + this.primaryField + "/" + value);
+            this.editResults = this.http.get(this.url + "/delete/" + this.table + "/" + this.primaryField + "/" + value);
+            this.editResults.subscribe(w=>console.log("Results from delete: " + w));
             break;
         default:
             break;
