@@ -3,21 +3,21 @@ db = require('./db');
 
 // variable that will hold all the functions that will explicitly communicate with the database
 var db_query = {
-    gettables: function(callback, db_name=db.config.connectionConfig.database) 
+    getTables: function(callback, db_name=db.config.connectionConfig.database) 
     {
         return db.query('SELECT TABLE_NAME AS name FROM information_schema.TABLES WHERE TABLE_SCHEMA = "' + db_name + '";', callback);
     },
-    gettable: function(callback)
+    getTable: function(callback)
     {
         console.log(callback);
         return db.query('SELECT * from ' + table_name, callback);
     },
-    gettabledesc: function(callback)
+    getTableDesc: function(callback)
     {
         console.log(callback);
         return db.query('DESCRIBE ' + table_name, callback);
     },
-    insertdata: function(callback)
+    insertData: function(callback)
     {
         var insert = "INSERT INTO " + table_name + "(";
         var columns = column_names.split('+');
@@ -54,7 +54,7 @@ var db_query = {
      *SET ContactName='Alfred Schmidt', City='Frankfurt'
      *WHERE CustomerID=1;
      */
-    updatedata: function(callback)
+    updateData: function(callback)
     {
         var updateRecord = "UPDATE " + table_name + " ";
         var set = "SET ";
@@ -85,7 +85,7 @@ var db_query = {
         console.log(updateQuery);
         return db.query(updateQuery);
     },
-    deletedata: function(callback)
+    deleteData: function(callback)
     {
         var deleteRecord = "Delete from " + table_name + " where " + column_name + " = " + key_value + ";";
         console.log(deleteRecord);

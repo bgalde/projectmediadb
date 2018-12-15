@@ -14,7 +14,7 @@ routes.all("/*", function (req, res, next) {
 // Function that will return a json of the tables in the database.
 // [{'name': 'table_one'},{'name': 'table_two'}]
 routes.get('/api/db/getTables', (req, res) => { 
-    db_query.gettables((err, rows) => {
+    db_query.getTables((err, rows) => {
         if (err) {
             res.status(400).json(err);
         }
@@ -28,7 +28,7 @@ routes.get('/api/db/getTables', (req, res) => {
 routes.get('/api/db/table/:table_name', (req, res) => {
     table_name = req.params.table_name;
     console.log('Getting contents for table ' + table_name);
-    db_query.gettable((err, rows, table_name) => {
+    db_query.getTable((err, rows, table_name) => {
         if (err) {
             res.status(400).json(err);
         }
@@ -42,7 +42,7 @@ routes.get('/api/db/table/:table_name', (req, res) => {
 routes.get('/api/db/tableDesc/:table_name', (req, res) => {
     table_name = req.params.table_name;
     console.log('Getting description for table ' + table_name);
-    db_query.gettabledesc((err, rows, table_name) => {
+    db_query.getTableDesc((err, rows, table_name) => {
         if (err) {
             res.status(400).json(err);
         }
@@ -58,7 +58,7 @@ routes.get('/api/db/insert/:table_name/:column_names/:row_data', (req, res) => {
     column_names = req.params.column_names;
     row_data = req.params.row_data;
     console.log('Inserting data into table ' + table_name);
-    db_query.insertdata((err, rows, table_name, column_names, row_data) => {
+    db_query.insertData((err, rows, table_name, column_names, row_data) => {
         if (err) {
             res.status(400).json(err);
         }
@@ -74,7 +74,7 @@ routes.get('/api/db/delete/:table_name/:column_name/:key_value', (req, res) => {
     column_name = req.params.column_name;
     key_value = req.params.key_value;
     console.log("Deleting record with " + column_name + " of " + key_value + " from " + table_name);
-    db_query.deletedata((err, row, table_name, column_name, key_value) => {
+    db_query.deleteData((err, row, table_name, column_name, key_value) => {
         if (err) {
             res.status(400).json(err);
         } else {
@@ -91,7 +91,7 @@ routes.get('/api/db/update/:table_name/:column_names/:row_data/:key_field/:key_v
     key_value = req.params.key_value;
     key_field = req.params.key_field;
     console.log('Updating data on table ' + table_name);
-    db_query.updatedata((err, rows, table_name, column_names, row_data, key_value, key_field) => {
+    db_query.updateData((err, rows, table_name, column_names, row_data, key_value, key_field) => {
         if (err){
             res.status(400).json(err);
         } else {
