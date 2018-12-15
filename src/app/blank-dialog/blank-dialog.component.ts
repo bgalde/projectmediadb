@@ -28,7 +28,6 @@ export class BlankDialogComponent implements OnInit {
     this.title = this.appService.table;
   }
 
-
   insert(): void {
     this.appService.setModalState("insert");
     this.dialogRef.close(this.data);

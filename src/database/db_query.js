@@ -56,36 +56,32 @@ var db_query = {
      */
     updatedata: function(callback)
     {
-        var updateRecord = "UPDATE " + table_name;
+        var updateRecord = "UPDATE " + table_name + " ";
         var set = "SET ";
-        var where = "WHERE " + primaryKey + "=" + primaryValue + ";";
+        var where = " WHERE ";
         var columns = column_names.split('+');
         var values = row_data.split('+');
         var primaryKey = key_field;
         var primaryValue = key_value;
-        var setRecord;
+        var setRecord ="";
         var ignore;
-        var count = 0;
         var updateQuery;
 
         for(var i = 0; i < columns.length; i++){
-            for(var j = 0; j < row_data.length; i++){
-                if(i == 0){
-                    ignore += columns[i] + values[i];
+                if(columns[i] != primaryKey){
+                    if(!isNaN(values)){
+                        setRecord += columns[i] + "=" + values[i];
+                    } else {
+                        setRecord += columns[i] + "=" + "'" + values[i] + "'";
+                    }
+                    if(i < values.length -1){
+                        setRecord += ", ";
+                    }
                 }
-                if(!isNaN(values)){
-                    setRecord += columns[i] + "=" + values[i];
-                } else {
-                    setRecord += columns[i] + "=" + "'" + values[i] + "'";
-                }
-                
-                if(count < values.length -1){
-                    setRecord += ", ";
-                }
-                count++;
-            }
         }
-        updateQuery += updateRecord + set + setRecord + where;
+
+        where += primaryKey + "=" + primaryValue + ';';
+        updateQuery = updateRecord + set + setRecord + where;
         console.log(updateQuery);
         return db.query(updateQuery);
     },

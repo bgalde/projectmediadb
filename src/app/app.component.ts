@@ -91,27 +91,16 @@ export class AppComponent implements OnInit{
       width: '70%',
       data:{}
     });
-    
-
-  dialogRef.afterClosed().subscribe(result => {
-   this.appService.editTable(result);
-   for(let v in result){
-        console.log(JSON.stringify(v) + " " + JSON.stringify(result[v]));
-        this.tableData.push(result[v]);
-   }
-   this.dataSource = new MatTableDataSource(this.tableData);
-   setTimeout(() => {}, 2000);
-   this.refresh();
-  });
-}
-
- /* delete(row: any) {
-    this.appService.setModalState("delete");
-    this.appService.editTable(row);
-    this.dataSource = new MatTableDataSource(this.tableData);
-    setTimeout(() => {}, 1000);
-    this.refresh();
-  }*/
+    dialogRef.afterClosed().subscribe(result => {
+      this.appService.editTable(result);
+      for(let v in result){
+            this.tableData.push(result[v]);
+      }
+      this.dataSource = new MatTableDataSource(this.tableData);
+      setTimeout(() => {}, 2000);
+      this.refresh();
+    });
+  }
 
   refresh() {
     setTimeout(() => {}, 2000);
@@ -119,7 +108,7 @@ export class AppComponent implements OnInit{
     this.changeDetectorRefs.detectChanges();
   }
 
-  // Run this function when the web app loads
+// Run this function when the web app loads
   ngOnInit(){
     this.data = this.appService.getAllTables();
 
