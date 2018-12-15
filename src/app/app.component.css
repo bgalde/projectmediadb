@@ -29,34 +29,6 @@
 
 }
 
-.custom-select{
-    position: relative;
-    font-size: 16px;
-}
-
-.custom-select select{
-    display: none;
-}
-
-.select-selected {
-    background-color: #333;
-}
-
-.selected-selected:after {
-    position: absolute;
-    content: "";
-    top: 14px;
-    right: 10px;
-    width: 0;
-    height: 0;
-    border: 6px solid transparent;
-    border-color: #fff transparent transparent transparent;
-}
-
-.select-selected.select-arrow-active:after {
-    border-color: 
-}
-
 .navbar a:hover, .dropdown:hover .dropbtn, .dropbtn:focus {
     background-color: red;
 }
@@ -70,21 +42,22 @@
 }
 .display-table {
     width: 80%;
-    margin: 20px auto;
+    margin: 10px auto;
   }
-  
-  .mat-column-id{
-    width: 10%;
-  }
-  
-  .mat-column-name {
-    width: 50%;
-  }
-  
-  .mat-column-year {
-    width: 30%;
-  }
-  .mat-column-type {
-    width: 50%;
-  }
+.headerRow{
+    background-color: #333;
+    font-size: 16px;
+    color: white;
+    
+    text-decoration: none;
+}
+.tableRow{
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+}
+.tableRow:hover{
+    background-color: lightgrey;
+}
+
   

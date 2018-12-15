@@ -61,8 +61,8 @@ export class AppComponent implements OnInit{
 
   openDialog($event, row) {
     const dialogRef = this.dialog.open(DialogComponent, {
-      height: '90%',
-      width: '70%',
+      height: '80%',
+      width: '40%',
       data: row
     });
 
@@ -81,8 +81,8 @@ export class AppComponent implements OnInit{
 
   openEmptyDialog($event) {
     const dialogRef = this.dialog.open(BlankDialogComponent, {
-      height: '90%',
-      width: '70%',
+      height: '80%',
+      width: '40%',
       data:{}
     });
     dialogRef.afterClosed().subscribe(result => {

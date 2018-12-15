@@ -1,13 +1,16 @@
-<h2 mat-dialog-title>Insert a Record for {{title}}</h2>
+<div class="navbar">
+    <h2 class="title" mat-dialog-title>Insert a Record for {{title}}</h2>
+    <mat-dialog-actions>
+        <button [mat-dialog-close] class="newRecord"><span class="glyphicon glypicon-remove"></span>Cancel</button>
+        <button (click)="insert()" class="newRecord"><span class="glyphicon glypicon-plus"></span>Insert Record</button>
+    </mat-dialog-actions>
+</div>
+<br>
+<div>
+  <mat-dialog-content > 
+      <label class="recordLabel" *ngFor="let item of fields">{{item}}<span></span>  
+      <li><input class="recordData" matInput [(ngModel)]="data[item]" placeholder=""/></li>
+      </label>
+  </mat-dialog-content>
+</div>
 
-<mat-dialog-content > 
-    <label *ngFor="let item of fields">{{item}}  
-    <br>  
-    <input matInput [(ngModel)]="data[item]" placeholder=""/><br>
-    </label>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-  <button mat-button [mat-dialog-close]>Cancel</button>
-  <button mat-raised-button (click)="insert()">Insert Record</button>
-</mat-dialog-actions>

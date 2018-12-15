@@ -48,12 +48,7 @@ var db_query = {
         console.log(insert);
         return db.query(insert);
     },
-    //this.editResults = this.http.get(this.url + "/update/" + this.table + "/set/" + col + "/" + res.replace(/\s/g, "%20") + "/" + this.primaryField + "/" + value);
-    /*
-     *UPDATE Customers
-     *SET ContactName='Alfred Schmidt', City='Frankfurt'
-     *WHERE CustomerID=1;
-     */
+
     updateData: function(callback)
     {
         var updateRecord = "UPDATE " + table_name + " ";

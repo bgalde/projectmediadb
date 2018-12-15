@@ -1,14 +1,16 @@
-<h2 mat-dialog-title>Edit a Record for {{title}}</h2>
-
-<mat-dialog-content > 
-    <label *ngFor="let item of fields">{{item}}  
-    <br>  
-    <input matInput [(ngModel)]="data[item]" placeholder=""/><br>
-    </label>
-</mat-dialog-content>
-
-<mat-dialog-actions>
-  <button mat-button [mat-dialog-close]>Cancel</button>
-  <button mat-raised-button (click)="delete()" >Delete Record</button>
-  <button mat-raised-button (click)="update()" >Update Record</button>
-</mat-dialog-actions>
+<div class="navbar">
+  <h2 class="title" mat-dialog-title>Edit a Record for {{title}}</h2>
+  <mat-dialog-actions>
+      <button class="newRecord" [mat-dialog-close]>Cancel</button>
+      <button class="newRecord" (click)="delete()" >Delete Record</button>
+      <button class="newRecord" (click)="update()" >Update Record</button>
+    </mat-dialog-actions>
+</div>
+<br>
+<div>
+  <mat-dialog-content > 
+      <label class="recordLabel" *ngFor="let item of fields">{{item}} <span></span> 
+      <li><input class="recordData" matInput [(ngModel)]="data[item]" placeholder=""/></li>
+      </label>
+  </mat-dialog-content>
+</div>

@@ -1,47 +1,50 @@
 <title>{{ title }}</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <div class="navbar">
-    <div class="col-sm-2">
+    <div>
         <a href="http://projectmediadb.ddns.net:4434/" height="25"><img src="assets/img/pmdb2.png" width="75" height="30"></a>
     </div>
-    <div class="custome-select">
+
+    <div>
       <form name="myForm">
         <select (change)="tableSelect($event.target.value)">
           <option selected="selected">Table to Query</option>
-	        <option *ngFor="let item of data |async">{{ item.name }}</option>
+	        <option *ngFor="let item of data |async">{{ item.name}}</option>
         </select>
       </form>
     </div>
     <div>
       <button class="newRecord" (click)="openEmptyDialog($event)">Insert a Record</button>
     </div>
+
     <div>
         <img src="assets/img/projectmediadb4.png" alt="ProjectMediaDB" width="200" height="50" align="right">
     </div>
 </div>
+
 <div class="col-*-*">
   <br>
   <h2>Welcome to {{ title }}</h2>
   <h3>SQL Engine designed for UMUC CMSC 495 Fall 2018 class project</h3>
   <h4>Created by Ryan Flynn, Brandon Galde, and Yodit Emiru</h4>
 </div>
+
 <div>
   <span>
     <ng-container *ngIf="appService.table !== undefined">
       <div class="mat-elevation-z8 display-table" >
           <mat-table #table class="full-width-table" [dataSource]="dataSource" aria-label="Elements">
               <ng-container *ngFor="let disCol of displayedColumns; let colIndex = index " matColumnDef="{{disCol}}">
-                  <mat-header-cell *matHeaderCellDef>{{disCol}}</mat-header-cell>
-                  <mat-cell *matCellDef="let element "> {{ element[disCol] }} 
+                  <mat-header-cell class="headerRow" *matHeaderCellDef>{{disCol }}</mat-header-cell>
+                  <mat-cell class="tableRow" *matCellDef="let element "> {{ element[disCol] }} 
                   </mat-cell>  
               </ng-container>
-             
-          
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openDialog($event, row)"></mat-row>
+            
+              <mat-header-row class="headerRow" *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row class="tableRow" *matRowDef="let row; columns: displayedColumns;" (click)="openDialog($event, row)"></mat-row>
           </mat-table>
       </div>
-  </ng-container>
-  
+   </ng-container>
   </span>
 </div>
 
