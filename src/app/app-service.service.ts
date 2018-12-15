@@ -33,7 +33,6 @@ import 'rxjs/add/operator/map';
 
     // Function to get contents of specified database table.
     getTable(table: string) {
-        console.log('fetching ' + this.url + '/table/' + table + '...');
         this.table = table;
         this.results = this.http.get(this.url + '/table/' + table);
         this.columns = this.http.get(this.url + '/tableDesc/' + table);
@@ -50,8 +49,6 @@ import 'rxjs/add/operator/map';
       var col = "";
       var res = "";
       var value = "";
-
-      console.log("col.length: " + col.length);
     
       for(let i in result){
         if(col.length == 0){
@@ -65,19 +62,16 @@ import 'rxjs/add/operator/map';
       }
       switch(this.modal_state){
         case "insert":
-            console.log("<<<< " + this.url + "/insert/" + this.table + "/" + col + "/" + res.replace(/\s/g, "%20"));
             this.editResults = this.http.get(this.url + "/insert/" + this.table + "/" + col + "/" + res.replace(/\s/g, "%20"));
             this.editResults.subscribe(w=>console.log("Results from insert: " + w));
             setTimeout(() => {}, 2000);
             break;
         case "update":
-            console.log("^^^^ " + this.url + "/update/" + this.table + "/" + col + "/" + res.replace(/\s/g, "%20") + "/" + this.primaryField + "/" + value);
             this.editResults = this.http.get(this.url + "/update/" + this.table + "/" + col + "/" + res.replace(/\s/g, "%20") + "/" + this.primaryField + "/" + value);
             this.editResults.subscribe(w=>console.log("Results from update: " + w));
             setTimeout(() => {}, 2000);
             break;
         case "delete":
-            console.log(">>>> " + this.url + "/delete/" + this.table + "/" + this.primaryField + "/" + value);
             this.editResults = this.http.get(this.url + "/delete/" + this.table + "/" + this.primaryField + "/" + value);
             this.editResults.subscribe(w=>console.log("Results from delete: " + w));
             setTimeout(() => {}, 2000);        

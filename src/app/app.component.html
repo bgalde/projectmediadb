@@ -1,9 +1,9 @@
 <title>{{ title }}</title>
 <div class="navbar">
     <div class="col-sm-2">
-        <a href="#home" height="25"><img src="assets/img/pmdb2.png" width="75" height="30"></a>
+        <a href="http://projectmediadb.ddns.net:4434/" height="25"><img src="assets/img/pmdb2.png" width="75" height="30"></a>
     </div>
-    <div>
+    <div class="custome-select">
       <form name="myForm">
         <select (change)="tableSelect($event.target.value)">
           <option selected="selected">Table to Query</option>
@@ -12,7 +12,7 @@
       </form>
     </div>
     <div>
-      <button (click)="openEmptyDialog($event)">Insert a Record</button>
+      <button class="newRecord" (click)="openEmptyDialog($event)">Insert a Record</button>
     </div>
     <div>
         <img src="assets/img/projectmediadb4.png" alt="ProjectMediaDB" width="200" height="50" align="right">

@@ -36,7 +36,6 @@ export class AppComponent implements OnInit{
   // Function to populate table on web app
   tableSelect(value:string) {
     if (value != "Table to Query") {
-      console.log(value + ' was selected.');
       this.appService.getTable(value);
 
      this.dataSource = [];
@@ -49,15 +48,12 @@ export class AppComponent implements OnInit{
       }
     })
 
-    console.log(this.tableData);
     this.appService.columns.subscribe(col=> { 
       for (let v in col) {
         this.displayedColumns.push(col[v].Field);
       }
     });
 
-
-    console.log(this.displayedColumns);
     this.dataSource = new MatTableDataSource(this.tableData);
     setTimeout(() => {}, 2000);
     }
@@ -70,12 +66,10 @@ export class AppComponent implements OnInit{
       data: row
     });
 
-    console.log("This record was clicked: " + JSON.stringify(row));
 
     dialogRef.afterClosed().subscribe(result => {
       this.appService.editTable(result);
       for(let v in result){
-           console.log(JSON.stringify(v) + " " + JSON.stringify(result[v]));
            this.tableData.push(result[v]);
       }
       this.dataSource = new MatTableDataSource(this.tableData);
@@ -111,7 +105,6 @@ export class AppComponent implements OnInit{
 // Run this function when the web app loads
   ngOnInit(){
     this.data = this.appService.getAllTables();
-
   }
 }
 
