@@ -9,12 +9,14 @@ import { MatTableModule, MatPaginatorModule, MatSortModule, MatDialogModule } fr
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog/dialog.component';
 import { FormsModule } from '@angular/forms';
+import { BlankDialogComponent } from './blank-dialog/blank-dialog.component';
 
 @NgModule({ 
   declarations: [
     AppComponent,
     //DisplayTablesComponent,
     DialogComponent,
+    BlankDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
   ],
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    BlankDialogComponent
   ],
   providers: [
     AppService,

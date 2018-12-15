@@ -68,4 +68,36 @@ routes.get('/api/db/insert/:table_name/:column_names/:row_data', (req, res) => {
     });
 });
 
+//function that will delete data based on a specific primary key
+routes.get('/api/db/delete/:table_name/:column_name/:key_value', (req, res) => {
+    table_name = req.params.table_name;
+    column_name = req.params.column_name;
+    key_value = req.params.key_value;
+    console.log("Deleting record with " + column_name + " of " + key_value + " from " + table_name);
+    db_query.deletedata((err, row, table_name, column_name, key_value) => {
+        if (err) {
+            res.status(400).json(err);
+        } else {
+            res.status(200).json(row);
+        }
+    });
+});
+
+//function that will update data on specified table
+routes.get('/api/db/update/:table_name/:column_names/:row_data/:key_field/:key_value', (req, res) => {
+    table_name = req.params.table_name;
+    column_names = req.params.column_names;
+    row_data = req.params.row_data;
+    key_value = req.params.key_value;
+    key_field = req.params.key_field;
+    console.log('Updating data on table ' + table_name);
+    db_query.updatedata((err, rows, table_name, column_names, row_data, key_value, key_field) => {
+        if (err){
+            res.status(400).json(err);
+        } else {
+            res.status(200).json(row);
+        }
+    });
+});
+
 module.exports = routes;

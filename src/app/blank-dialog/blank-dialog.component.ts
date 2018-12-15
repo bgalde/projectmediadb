@@ -3,18 +3,18 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { AppService } from '../app-service.service';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  selector: 'app-blank-dialog',
+  templateUrl: './blank-dialog.component.html',
+  styleUrls: ['./blank-dialog.component.css']
 })
-export class DialogComponent implements OnInit {
+export class BlankDialogComponent implements OnInit {
   @Input() inputData;
   private fields: any=[];
   private title;
   public modal_state;
   private show;
   
-  constructor(public dialogRef: MatDialogRef<DialogComponent>, 
+  constructor(public dialogRef: MatDialogRef<BlankDialogComponent>, 
     @Inject(MAT_DIALOG_DATA) public data, private appService: AppService) {
 
    }
@@ -28,21 +28,10 @@ export class DialogComponent implements OnInit {
     this.title = this.appService.table;
   }
 
-  update(): void {
-    this.appService.setModalState("update");
+
+  insert(): void {
+    this.appService.setModalState("insert");
     this.dialogRef.close(this.data);
     //save the document,
-
   }
-
-  delete(): void {
-    this.appService.setModalState("delete");
-    this.dialogRef.close(this.data);
-    //delete the document,
-  }
-
-  close(): void {
-    this.dialogRef.close();
-  }
-
 }

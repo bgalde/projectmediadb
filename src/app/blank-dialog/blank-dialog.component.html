@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Edit a Record for {{title}}</h2>
+<h2 mat-dialog-title>Insert a Record for {{title}}</h2>
 
 <mat-dialog-content > 
     <label *ngFor="let item of fields">{{item}}  
@@ -9,6 +9,5 @@
 
 <mat-dialog-actions>
   <button mat-button [mat-dialog-close]>Cancel</button>
-  <button mat-raised-button (click)="delete()" >Delete Record</button>
-  <button mat-raised-button (click)="update()" >Update Record</button>
+  <button mat-raised-button (click)="insert()">Insert Record</button>
 </mat-dialog-actions>

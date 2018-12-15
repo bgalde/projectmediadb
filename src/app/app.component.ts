@@ -9,6 +9,7 @@ import { URLSearchParams } from '@angular/http';
 // import our service for the app
 import { AppService } from './app-service.service';
 import { DialogComponent } from './dialog/dialog.component';
+import { BlankDialogComponent } from './blank-dialog/blank-dialog.component';
 
 @Component({ 
   selector: 'app-root',
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit{
   public rowData: any=[];
   public url;
   private count = 0;
+  private show = "true";
 
   constructor(public dialog: MatDialog, private appService: AppService, private changeDetectorRefs: ChangeDetectorRef) {
   }
@@ -54,16 +56,17 @@ export class AppComponent implements OnInit{
       }
     });
 
+
     console.log(this.displayedColumns);
     this.dataSource = new MatTableDataSource(this.tableData);
-
+    setTimeout(() => {}, 2000);
     }
   }
 
-  openDialog(event, row) {
+  openDialog($event, row) {
     const dialogRef = this.dialog.open(DialogComponent, {
-      height: '100%',
-      width: '30%',
+      height: '90%',
+      width: '70%',
       data: row
     });
 
@@ -76,55 +79,20 @@ export class AppComponent implements OnInit{
            this.tableData.push(result[v]);
       }
       this.dataSource = new MatTableDataSource(this.tableData);
+      setTimeout(() => {}, 2000);
       this.refresh();
     });
     
   }
 
-  refresh() {
-    this.tableSelect(this.appService.table);
-    this.changeDetectorRefs.detectChanges();
-  }
   openEmptyDialog($event) {
-    const dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(BlankDialogComponent, {
       height: '90%',
       width: '70%',
-      data: {
-       
-      }
+      data:{}
     });
-
     
-    /*
-    dialogRef.afterClosed().subscribe(result => {
-      this.url = "http://projectmediadb.ddns.net:8180/api/db/"
-      for(let i in result){
-        if(this.count == 0){
-          this.columns += i; 
-          this.res += result[i];
-        } else {
-          this.columns += "+" + i;
-          this.res += "+" + result[i];
-        }
-        this.count++;
-      }
 
-      //<<<< http://projectmediadb.ddns.net:8180/api/db/books/ insert/function replace() { [native code] }/%202+4+test+45+34+test+test
-      switch(this.appService.modal_state){
-        case "insert":
-            console.log("<<<< " + this.url + this.appService.table + "/insert/"
-                 + this.columns + "/" + this.res.replace(/\s/g, "%20"));
-           // return this.url + this.appService.table + "/" this.appService.modal_state + "/" + this.columns.replace + "/" + this.res.replace("", "%20")
-            break;
-        case "delete":
-            console.log(">>>> " + this.url + this.appService.table + "/delete/");
-           // return this.url + this.appService.table + "/" this.appService.modal_state;
-            break;
-        default:
-            break;
-      }
-    });
-    */
   dialogRef.afterClosed().subscribe(result => {
    this.appService.editTable(result);
    for(let v in result){
@@ -132,13 +100,29 @@ export class AppComponent implements OnInit{
         this.tableData.push(result[v]);
    }
    this.dataSource = new MatTableDataSource(this.tableData);
+   setTimeout(() => {}, 2000);
    this.refresh();
   });
+}
 
+ /* delete(row: any) {
+    this.appService.setModalState("delete");
+    this.appService.editTable(row);
+    this.dataSource = new MatTableDataSource(this.tableData);
+    setTimeout(() => {}, 1000);
+    this.refresh();
+  }*/
+
+  refresh() {
+    setTimeout(() => {}, 2000);
+    this.tableSelect(this.appService.table);
+    this.changeDetectorRefs.detectChanges();
   }
+
   // Run this function when the web app loads
   ngOnInit(){
     this.data = this.appService.getAllTables();
 
   }
 }
+
