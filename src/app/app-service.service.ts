@@ -24,7 +24,7 @@ import 'rxjs/add/operator/map';
       this.columns = new Observable<any>();
     }
     // URL for the node.js REST API
-    url = 'http://projectmediadb.ddns.net:8180/api/db';
+    url = 'http://192.168.1.115:8181/api/db';
 
     // Function that requests the tables from database.
     getAllTables() {

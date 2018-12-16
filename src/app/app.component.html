@@ -9,11 +9,11 @@
       <form name="myForm">
         <select (change)="tableSelect($event.target.value)">
           <option selected="selected">Table to Query</option>
-	        <option *ngFor="let item of data |async">{{ item.name}}</option>
+	        <option *ngFor="let item of data |async">{{ item.name }}</option>
         </select>
       </form>
     </div>
-    <div>
+    <div *ngIf="appService.table !== undefined">
       <button class="newRecord" (click)="openEmptyDialog($event)">Insert a Record</button>
     </div>
 

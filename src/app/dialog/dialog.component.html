@@ -1,6 +1,6 @@
 <div class="navbar">
   <h2 class="title" mat-dialog-title>Edit a Record for {{title}}</h2>
-  <mat-dialog-actions>
+    <mat-dialog-actions>
       <button class="newRecord" [mat-dialog-close]>Cancel</button>
       <button class="newRecord" (click)="delete()" >Delete Record</button>
       <button class="newRecord" (click)="update()" >Update Record</button>
@@ -9,8 +9,23 @@
 <br>
 <div>
   <mat-dialog-content > 
-      <label class="recordLabel" *ngFor="let item of fields">{{item}} <span></span> 
-      <li><input class="recordData" matInput [(ngModel)]="data[item]" placeholder=""/></li>
+      <label class="recordLabel" *ngFor="let item of fields">{{ item }} <span></span> 
+        <!-- If the field is not the Primary key, create an input box that can be modified. -->
+        <li *ngIf="item !== appService.primaryField">
+          <input class="recordData" 
+                matInput 
+                [(ngModel)]="data[item]" 
+                placeholder=""/>
+        </li>
+        <!-- If field is the primary key, it should not be modifiable for the user. -->
+        <li *ngIf="item == appService.primaryField">
+            <input class="recordData" 
+                  matInput 
+                  [(ngModel)]="data[item]" 
+                  placeholder=""
+                  [attr.disabled]="true"/>
+        </li>
+    
       </label>
   </mat-dialog-content>
 </div>
