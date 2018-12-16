@@ -13,9 +13,9 @@
         <!-- If the field is not the Primary key, create an input box that can be modified. -->
         <li *ngIf="item !== appService.primaryField">
           <input class="recordData" 
-                matInput 
-                [(ngModel)]="data[item]" 
-                placeholder=""/>
+                 matInput 
+                 [(ngModel)]="data[item]" 
+                 placeholder=""/>
         </li>
         <!-- If field is the primary key, it should not be modifiable for the user. -->
         <li *ngIf="item == appService.primaryField">

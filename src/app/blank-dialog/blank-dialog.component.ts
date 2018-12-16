@@ -7,6 +7,7 @@ import { AppService } from '../app-service.service';
   templateUrl: './blank-dialog.component.html',
   styleUrls: ['./blank-dialog.component.css']
 })
+
 export class BlankDialogComponent implements OnInit {
   @Input() inputData;
   private fields: any=[];
@@ -18,6 +19,7 @@ export class BlankDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data, private appService: AppService) {
 
    }
+
 
   ngOnInit() {
     this.appService.columns.subscribe(col=> { 

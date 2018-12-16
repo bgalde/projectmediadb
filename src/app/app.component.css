@@ -40,10 +40,12 @@
 .image {
     text-align: right;
 }
+
 .display-table {
     width: 80%;
     margin: 10px auto;
-  }
+}
+
 .headerRow{
     background-color: #333;
     font-size: 16px;
@@ -51,11 +53,13 @@
     
     text-decoration: none;
 }
+
 .tableRow{
     font-size: 16px;
     text-align: center;
     text-decoration: none;
 }
+
 .tableRow:hover{
     background-color: lightgrey;
 }

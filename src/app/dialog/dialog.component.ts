@@ -19,7 +19,8 @@ export class DialogComponent implements OnInit {
 
    }
 
-  ngOnInit() {
+  
+   ngOnInit() {
     this.appService.columns.subscribe(col=> { 
       for (let v in col) {
         this.fields.push(col[v].Field);
